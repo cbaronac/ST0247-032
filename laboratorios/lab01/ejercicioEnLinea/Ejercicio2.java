@@ -31,13 +31,12 @@ public class Ejercicio2
 
     private static boolean auxBicolorable(int [][] graph, int [] color)
     {
-        Stack<Integer> round =  new Stack<>();
-        round.push(0);
-        while(round.size() != 0)
+        Stack<Integer> cont =  new Stack<>();
+        cont.push(0);
+        while(cont.size() != 0)
         {
-            System.out.println("Pila: "+round);
-            int actual = round.pop();
-            System.out.println("Pop de la pila: "+actual);
+            System.out.println("Pila: "+cont);
+            int actual = cont.pop();
             for(int i = 0; i < graph.length; i++)
             {
                 if(graph[actual][i] == 1 && color[i] == 4)
@@ -46,9 +45,8 @@ public class Ejercicio2
                     System.out.println("Color actual: "+color[actual]);
                     System.out.println("Color en la posición "+i+": "+color[i]);
                     color[i] = 1-color[actual];
-                    System.out.println("Color después de la operación: "+color[i]);
-                    System.out.println("Pila: "+round);
-                    System.out.println("Valor ingresado en la pila: "+round.push(i));
+                    System.out.println("Color adyacente: "+color[i]);
+                    System.out.println("Valor ingresado en la pila: "+cont.push(i));
                     //round.push(i);
                 }else if(graph[actual][i] == 1  && color[actual] == color[i]){
                     System.out.println("NO CUMPLE CONDICIÓN");
