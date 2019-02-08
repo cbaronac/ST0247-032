@@ -31,7 +31,7 @@ public class Ejercicio1
     private static boolean noSeAtacanHastaIoNo(int[] tablero,int elI){
         for (int i=0; i<elI-1;i++){
             for (int j=i+1;j<elI;j++){
-                if(Math.abs(tablero[i]-tablero[j])==Math.abs(i-j) && tablero[i]==tablero[j]){
+                if(Math.abs(tablero[i]-tablero[j])==Math.abs(i-j) || tablero[i]==tablero[j]){
                     return false;
                 }
             }
