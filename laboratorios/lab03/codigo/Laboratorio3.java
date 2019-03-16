@@ -19,29 +19,6 @@ import java.util.ArrayDeque;
 public class Laboratorio3 {
     
     static ArrayDeque<Pair<Integer,Double>> cola = new ArrayDeque();
-    
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        /*Lector grafo=new Lector();
-        int origen=0;
-        int destino=0;
-        punto1(grafo.makeMap(),origen,destino);*/
-        Lector graf = new Lector();
-        HashMap<Integer, Pair<Vertex, LinkedList<Edge>>> grafo = graf.makeMap();
-        ArrayList<Integer> lista = graf.getSuccessors(grafo, 1);
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.print(lista.get(i) + " , ");
-
-        }
-        punto1Aux(grafo,1,2);
-        //double hola = graf.getWeight(grafo, 1,2);
-        //System.out.println(hola);
-        //punto1Aux(grafo,1,4);
-
-    }
 
     private static double[] llenarInfinitos(int tam) {
         double[] a = new double[tam];
