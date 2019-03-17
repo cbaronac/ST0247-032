@@ -14,7 +14,7 @@ import java.util.ArrayDeque;
 
 /**
  *
- * @author pipe_sosa
+ * @author Felipe Sosa y Camila Barona
  */
 public class Laboratorio3 {
     
