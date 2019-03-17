@@ -108,36 +108,10 @@ public class Lector {
         } catch (IOException e) {
             System.out.println("nothing of that...");
             e.printStackTrace();
-        } /*finally {
-            try {
-                reader.close();//close the buffered reader
-                System.out.println(cont);
-                System.out.println("information saved successfully");
-                System.out.println("insert a vertex ID:");
-                Scanner user = new Scanner(System.in);
-                long vertexID = user.nextLong();//get the vertexID from the user information
-                Pair pair = hashMap.get(vertexID);
-                Vertex vertex = (Vertex) pair.getKey();
-                System.out.println("x coordenate: " + vertex.x);
-                System.out.println("y coordenate: " + vertex.y);
-                System.out.println("name: " + vertex.name);
-
-                LinkedList<Edge> list = (LinkedList<Edge>) pair.getValue();
-                for (int i = 0; i < list.size(); i++) { // this loop is for print each edge 
-                    System.out.print("edge between ");
-                    System.out.print(list.get(i).ID1 + " and ");
-                    System.out.println(list.get(i).ID2);
-                    System.out.println("distance: " + list.get(i).distance);
-                    System.out.println("name: " + list.get(i).name);
-
-                }
-            } catch (IOException e) {
-                //System.out.println("nada de eso...");
-                e.printStackTrace();
-            }
-        }*/
+        } 
         return null;
     }
+    
     public static ArrayList<Integer> getSuccessors(HashMap<Integer, Pair<Vertex, LinkedList<Edge>>> grafo, int verticeID){
         ArrayList<Integer> lista=new ArrayList();
         Pair<Vertex, LinkedList<Edge>> vertice_aristas =grafo.get(verticeID);
