@@ -7,7 +7,7 @@ package laboratorio3;
 
 /**
  *
- * @author pipe_sosa
+ * @author Camila Barona, Felipe Sosa
  */
 public class Edge {
     int ID1;
