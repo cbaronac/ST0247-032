@@ -7,7 +7,7 @@ package proyecto;
 
 /**
  *
- * @author pipe_sosa
+ * @author Camila Barona y Felipe Sosa
  */
 public class Edge {
     int ID1;
