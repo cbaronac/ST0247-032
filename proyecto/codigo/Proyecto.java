@@ -12,7 +12,7 @@ import javafx.util.Pair;
 
 /**
  *
- * @author pipe_sosa
+ * @author Camila Barona y Felipe Sosa
  */
 public class Proyecto {
 
