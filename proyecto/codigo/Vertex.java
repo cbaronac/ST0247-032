@@ -7,7 +7,7 @@ package proyecto;
 
 /**
  *
- * @author pipe_sosa
+ * @author Felipe Sosa, Camila Barona
  */
 public class Vertex {
 
