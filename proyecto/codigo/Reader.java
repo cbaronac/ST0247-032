@@ -35,7 +35,7 @@ public class Reader {
         BufferedReader reader = null; // to initialize the buffered reader 
         HashMap<Long, Pair<Vertex, LinkedList<Edge>>> hashMap = new HashMap(); //initialize the 
         //hash map where everything
-        String fileName = "archivo.txt";                                                           // is going to be stored.
+        String fileName = "medellin_colombia-grande.txt";                                                           // is going to be stored.
         int cont = 0;
         try {
 
