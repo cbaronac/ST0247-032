@@ -49,7 +49,7 @@ public class Reader {
 
             while (line != null) { // this loop is for roaming throw each line
 
-                if (line.contains("Costo de Caminos Cortos.")) {// if that specific line contains "aristas" it has to change doing 
+                if (line.contains("Arcos.")) {// if that specific line contains "aristas" it has to change doing 
                     //vertex for doing edges 
                     change = true;
                     System.out.println("start creation of edges");
@@ -89,9 +89,14 @@ public class Reader {
                 }
                 if (change) { // if the method has change to make edges
                     //System.out.println("edgesss");
+                    String completeName = "";
+                    edgeComponents = line.split(" "); // to separate each component of the line
+                    for (int i = 3; i < edgeComponents.length; i++) {// this loop concatenate the name information of the vertex
+                        completeName += edgeComponents[i] + " ";
+                    }
                     edgeComponents = line.split(" "); // to separate each component of the line
                     Edge edge = new Edge(Long.parseLong(edgeComponents[0]), Long.parseLong(edgeComponents[1]),
-                            Double.parseDouble(edgeComponents[2]));// to create a edge with all the information that we have
+                            Double.parseDouble(edgeComponents[2]),completeName);// to create a edge with all the information that we have
                     hashMap.get(edge.ID1).getValue().add(edge);// add that edge to the vertex1 list
                     //hashMap.get(edge.ID2).getValue().add(edge);// add that edge to the vertex2 list
                 }
