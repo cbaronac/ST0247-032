@@ -1,10 +1,10 @@
 import java.util.*;
 
 /**
- * Write a description of class Taller6 here.
+ * Solution of exercise 1 - LAB 04.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Camila Barona
+ * @version 2019
  */
 public class Punto1
 
