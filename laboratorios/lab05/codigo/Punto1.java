@@ -10,7 +10,7 @@
  *
  * @author Camila Barona y Felipe Sosa
  */
-public class Taller11 {
+public class Punto1 {
 
     /**
      * Dado un grafo completo, hallen el costo mínimo del recorrido que pasa por
