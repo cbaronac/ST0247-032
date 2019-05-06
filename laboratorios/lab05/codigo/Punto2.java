@@ -16,8 +16,6 @@ import javafx.util.Pair;
  */
 public class Punto2 {
 
-    int numDesRad2;
-
     /**
      * @param args the command line arguments
      */
@@ -46,7 +44,6 @@ public class Punto2 {
                 int coorX = Character.getNumericValue(coorKaro[0].charAt(0)), coorY = Character.getNumericValue(coorKaro[1].charAt(0));
                 matriz[coorY - 1][coorX - 1] = "K";
                 int numDesRad = Integer.parseInt(reader.readLine());
-                numDesRad2 = numDesRad;
                 while (numDesRad > 0) {
                     String linea3 = reader.readLine();
                     String[] coorRad = linea3.split(" ");
@@ -81,8 +78,7 @@ public class Punto2 {
                     matriz[i][j] = Integer.toString(value);
                 } else {
                     if (!matriz[i][j].equals("K")) {
-                        matriz[i][j] = "K";
-                        cont++;
+                        matriz[i][j] = "V";
                         int value = 0;
                         Pair<Integer, Integer> coorRad = new Pair(i, j);
                         if ((!matriz[i + 1][j].equals("0") || !matriz[i - 1][j].equals("0") || !matriz[i][j + 1].equals("0") || !matriz[i][j - 1].equals("0"))
@@ -92,9 +88,10 @@ public class Punto2 {
                         }
                         return research(matriz, coorRad) + value;
                     } else {
-                        if (cont == numDesRad2) {
+                        if (cont>0) {
                             return 0;
                         }
+                        cont++;
                     }
                 }
 
