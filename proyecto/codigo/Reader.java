@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package proyecto;
 
 /**
  * Esta clase debe de contener la solucion al problema planteado en el punto 1
@@ -16,8 +17,7 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.PriorityQueue;
 
 import javafx.util.Pair;
 
@@ -30,12 +30,15 @@ public class Reader {
      *
      * @return
      */
-    public static HashMap<Integer, Pair<Vertex, LinkedList<Edge>>> makeMap() {
+    public static HashMap<Integer, Pair<Vertex, ArrayList<Edge>>> makeMap(double p,String file) {
+
+        PriorityQueue<Vertex> queue = new PriorityQueue();
         BufferedReader reader = null; // to initialize the buffered reader 
-        HashMap<Integer, Pair<Vertex, LinkedList<Edge>>> hashMap = new HashMap(); //initialize the 
+        HashMap<Integer, Pair<Vertex, ArrayList<Edge>>> hashMap = new HashMap();   //initialize the 
         //hash map where everything
-        String fileName = "DataSet3.txt";                                                           // is going to be stored.
+        String fileName = file;                                           // is going to be stored.
         int cont = 0;
+        int cont2 = 0;
         try {
 
             reader = new BufferedReader(new FileReader(fileName)); //reinitialize the bufferedreader but with the file we need
@@ -73,15 +76,15 @@ public class Reader {
                         }
 
                         vertex = new Vertex(Integer.parseInt(vertexComponents[0]), Double.parseDouble(vertexComponents[1]),
-                            Double.parseDouble(vertexComponents[2]), completeName);//create the vertex�?
+                                Double.parseDouble(vertexComponents[2]), completeName);//create the vertex�?
                     }
                     if (vertexComponents.length == 3) {// if vertexComponents has 3 elements we have to put the name as unknown
                         vertex = new Vertex(Integer.parseInt(vertexComponents[0]), Double.parseDouble(vertexComponents[1]),
-                            Double.parseDouble(vertexComponents[2]));//create the vertex
+                                Double.parseDouble(vertexComponents[2]));//create the vertex
                     }
 
-                    LinkedList<Edge> list = new LinkedList();//initialize the list of edges that would have each vertex
-                    Pair<Vertex, LinkedList<Edge>> pair = new Pair(vertex, list);//make a couple of data between each vertex and his list
+                    ArrayList<Edge> list = new ArrayList();//initialize the list of edges that would have each vertex
+                    Pair<Vertex, ArrayList<Edge>> pair = new Pair(vertex, list);//make a couple of data between each vertex and his list
                     hashMap.put(vertex.ID, pair);// use the vertex ID for get access to the previous pair.
                     cont++;
 
@@ -89,18 +92,25 @@ public class Reader {
                 if (change) { // if the method has change to make edges
                     //System.out.println("edgesss");
                     edgeComponents = line.split(" "); // to separate each component of the line
-                    Edge edge = new Edge(Integer.parseInt(edgeComponents[0]), Integer.parseInt(edgeComponents[1]),
-                            Double.parseDouble(edgeComponents[2]));// to create a edge with all the information that we have
-                    hashMap.get(edge.ID1).getValue().add(edge);// add that edge to the vertex1 list
-                    //hashMap.get(edge.ID2).getValue().add(edge);// add that edge to the vertex2 list
-                }
+                    if (!edgeComponents[0].equals("1")) {
+                        if (Double.parseDouble(edgeComponents[2]) < (p * getWeight(hashMap, 1, Integer.parseInt(edgeComponents[0]))) || edgeComponents[1].equals("1")) {
+                            Edge edge = new Edge(Integer.parseInt(edgeComponents[0]), Integer.parseInt(edgeComponents[1]),
+                                    Integer.parseInt(edgeComponents[2]));// to create a edge with all the information that we have
+                            hashMap.get(edge.ID1).getValue().add(edge);// add that edge to the vertex1 list
+                            //hashMap.get(edge.ID2).getValue().add(edge);// add that edge to the vertex2 list
+                        }
+                    } else {
+                        Edge edge = new Edge(Integer.parseInt(edgeComponents[0]), Integer.parseInt(edgeComponents[1]),
+                                Integer.parseInt(edgeComponents[2]));// to create a edge with all the information that we have
+                        hashMap.get(edge.ID1).getValue().add(edge);
+                    }
 
+                }
                 line = reader.readLine();
             }
             return hashMap;
 
         } catch (IOException e) {
-            System.out.println("nothing of that...");
             e.printStackTrace();
         } finally {
             try {
@@ -112,29 +122,26 @@ public class Reader {
         return null;
     }
 
-    public static ArrayList<Integer> getSuccessors(HashMap<Integer, Pair<Vertex, LinkedList<Edge>>> grafo, int verticeID){
-        ArrayList<Integer> lista=new ArrayList();
-        Pair<Vertex, LinkedList<Edge>> vertice_aristas =grafo.get(verticeID);
-        LinkedList <Edge> infoSucesores= vertice_aristas.getValue();
-        for(int i=0;i<infoSucesores.size();i++){
-            if(infoSucesores.get(i).ID1==verticeID){
+    public static ArrayList<Integer> getSuccessors(HashMap<Integer, Pair<Vertex, ArrayList<Edge>>> grafo, int verticeID) {
+        ArrayList<Integer> lista = new ArrayList();
+        Pair<Vertex, ArrayList<Edge>> vertice_aristas = grafo.get(verticeID);
+        ArrayList<Edge> infoSucesores = vertice_aristas.getValue();
+        for (int i = 0; i < infoSucesores.size(); i++) {
+            if (infoSucesores.get(i).ID1 == verticeID) {
                 lista.add(infoSucesores.get(i).ID2);
-            }else if(infoSucesores.get(i).ID2==verticeID){
-                lista.add(infoSucesores.get(i).ID1);
-            }
+            } 
         }
         return lista;
     }
 
-    public static double getWeight(HashMap<Integer, Pair<Vertex, LinkedList<Edge>>> grafo,int inicioID, int destinoID){
-        Pair<Vertex, LinkedList<Edge>> vertice_aristas =grafo.get(inicioID);
-        LinkedList <Edge> infoSucesores= vertice_aristas.getValue();
-        for(int i=0;i<infoSucesores.size();i++){
-            if(infoSucesores.get(i).ID1==inicioID && infoSucesores.get(i).ID2==destinoID ){
+    public static double getWeight(HashMap<Integer, Pair<Vertex, ArrayList<Edge>>> grafo, int inicioID, int destinoID) {
+        Pair<Vertex, ArrayList<Edge>> vertice_aristas = grafo.get(inicioID);
+        ArrayList<Edge> infoSucesores = vertice_aristas.getValue();
+        for (int i = 0; i < infoSucesores.size(); i++) {
+            if (infoSucesores.get(i).ID1 == inicioID && infoSucesores.get(i).ID2 == destinoID) {
                 return infoSucesores.get(i).distance;
-            }   
+            }
         }
-        return 0;
-
-    }
+        return Integer.MAX_VALUE;
+    } 
 }
